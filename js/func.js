@@ -25,6 +25,14 @@ async function waitReady(){
     while (document.readyState !== "complete"){
         await new Promise(resolve => setTimeout(resolve, 100))
     }
+    let index = 0
+    const invalidTitles = [
+        "",
+        "Twitter",
+    ]
+    while (invalidTitles.indexOf(document.title) !== -1 && ++index < 50){
+        await new Promise(resolve => setTimeout(resolve, 100))
+    }
 }
 
 async function getActiveURL(){

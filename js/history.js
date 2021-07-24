@@ -43,7 +43,6 @@ async function main(){
                 return colors[history.hostCode % colors.length]
             },
             star: async function(index){
-                console.log(index)
                 const targetHistory = this.histories[index]
                 this.histories[index].star = !this.histories[index].star
                 histories = (await getStorage()).dict
@@ -52,7 +51,7 @@ async function main(){
             },
             deleteHistory: async function(index){
                 const targetHistory = this.histories[index]
-                this.histories.splice(1, index)
+                this.histories.splice(index, 1)
                 histories = (await getStorage()).dict
                 delete histories[targetHistory.url]
                 await setStorage({dict: histories})
