@@ -17,7 +17,7 @@
                 v-model="isOnlyStar"
             ></v-switch>
             <v-sheet
-                v-for="history in (isOnlyStar ? histories.filter(history => history.star) : histories)"
+                v-for="history in currentHistories.slice((page - 1) * numberPerPage, page * this.numberPerPage)"
                 class="px-16 flex"
                 :color="myColor(history)"
                 :key="history.url"
@@ -53,6 +53,12 @@
                     </span>
                 </span>
             </v-sheet>
+            <v-pagination
+                v-model="page"
+                total-visible="10"
+                class="fixed bottom-8 inset-x-1/2"
+                :length="Math.ceil(currentHistories.length / numberPerPage)"
+            ></v-pagination>
       </v-main>
     </v-app>
   </div>

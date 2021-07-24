@@ -35,7 +35,14 @@ async function main(){
             return {
                 isIncludeHost: false,
                 isOnlyStar: false,
+                numberPerPage: 100,
+                page: 1,
                 histories: calcHistories(),
+            }
+        },
+        computed: {
+            currentHistories(){
+                return (this.isOnlyStar ? this.histories.filter(history => history.star) : this.histories)
             }
         },
         methods: {
