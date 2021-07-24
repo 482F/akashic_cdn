@@ -63,6 +63,10 @@ async function main(){
                 delete histories[targetHistory.url]
                 await setStorage({dict: histories})
             },
+            reload: async function(){
+                histories = (await getStorage()).dict
+                this.histories = calcHistories()
+            },
         },
     })
 }

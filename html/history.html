@@ -13,9 +13,15 @@
       <v-main>
             <v-switch
                 label="only star"
-                class="ml-4"
+                class="inline-block ml-4"
                 v-model="isOnlyStar"
             ></v-switch>
+            <v-btn
+                @click="reload"
+                outlined
+                :ripple="false"
+                class="inline-block"
+            >reload</v-btn>
             <v-sheet
                 v-for="history in currentHistories.slice((page - 1) * numberPerPage, page * this.numberPerPage)"
                 class="px-16 flex"
