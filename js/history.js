@@ -5,7 +5,6 @@ async function main(){
         .map(history => {return {url: history[0], ...history[1]};})
         .sort((a, b) => b.lastDateTime - a.lastDateTime)
         .filter(history => !history.isHost)
-        .map((history, index) => {return {index, ...history};})
     }
     const colors = [
         "red",
@@ -49,14 +48,16 @@ async function main(){
             myColor(history){
                 return colors[history.hostCode % colors.length]
             },
-            star: async function(index){
+            star: async function(url){
+                const index = this.histories.findIndex(history => history.url === url)
                 const targetHistory = this.histories[index]
                 this.histories[index].star = !this.histories[index].star
                 histories = (await getStorage()).dict
                 histories[targetHistory.url].star = !histories[targetHistory.url].star
                 await setStorage({dict: histories})
             },
-            deleteHistory: async function(index){
+            deleteHistory: async function(url){
+                const index = this.histories.findIndex(history => history.url === url)
                 const targetHistory = this.histories[index]
                 this.histories.splice(index, 1)
                 histories = (await getStorage()).dict

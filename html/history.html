@@ -39,7 +39,7 @@
                     </span>
                     <span>
                         <v-btn
-                            @click="star(history.index)"
+                            @click="star(history.url)"
                             outlined
                             :ripple="false"
                             :class="history.star ? 'bg-yellow-500' : 'bg-white'"
@@ -48,7 +48,7 @@
                             <span :class="history.star ? 'text-white' : 'text-yellow-500'">s</span>
                         </v-btn>
                         <v-btn
-                            @click="deleteHistory(history.index)"
+                            @click="deleteHistory(history.url)"
                             outlined
                             :ripple="false"
                             class="bg-white"
