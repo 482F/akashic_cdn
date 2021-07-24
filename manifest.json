@@ -2,6 +2,9 @@
 	"manifest_version": 2,
 		"name": "akashic",
 		"version": "0.0.0.1",
+        "browser_action": {
+			"default_popup": "html/popup.html"
+		},
         "commands": {
             "openConfig": {
                 "suggested_key": {

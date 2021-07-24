@@ -21,6 +21,24 @@ async function getStorage(){
     return returnItems
 }
 
+async function waitReady(){
+    while (document.readyState !== "complete"){
+        await new Promise(resolve => setTimeout(resolve, 100))
+    }
+}
+
+async function getActiveURL(){
+    let url = null;
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+        let tab = tabs[0];
+        url = tab.url;
+    });
+    while (url === null){
+        await new Promise(resolve => setTimeout(resolve, 100))
+    }
+    return decodeURI(url)
+}
+
 function splitURL(url){
     const index = url.indexOf("/", 8)
     if (index === -1){
