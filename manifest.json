@@ -1,0 +1,36 @@
+{
+	"manifest_version": 2,
+		"name": "akashic",
+		"version": "0.0.0.1",
+        "commands": {
+            "openConfig": {
+                "suggested_key": {
+                    "default": "Alt+A"
+                },
+                "description": "open history page"
+            },
+            "reload": {
+                "suggested_key": {
+                    "default": "Alt+Shift+A"
+                },
+                "description": "reload extension"
+            }
+        },
+		"permissions": [
+			"tabs",
+            "storage",
+            "unlimitedStorage"
+		],
+        "background": {
+			"scripts": ["js/func.js", "js/background.js"],
+			"persistent": true
+        },
+		"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*" ],
+			"js": [ "js/func.js", "js/content.js" ]
+		}
+		],
+        "content_security_policy": "script-src 'unsafe-eval' 'self'; object-src 'self'",
+        "options_page": "html/history.html"
+}

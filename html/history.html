@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../cdn/css.css" rel="stylesheet">
+    <link href="../cdn/materialdesignicons.min.css" rel="stylesheet">
+    <link href="../cdn/vuetify.min.css" rel="stylesheet">
+    <link href="../cdn/tailwind.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-main>
+            <v-switch
+                label="only star"
+                class="ml-4"
+                v-model="isOnlyStar"
+            ></v-switch>
+            <v-sheet
+                v-for="history in (isOnlyStar ? histories.filter(history => history.star) : histories)"
+                class="px-16 flex"
+                :color="myColor(history)"
+                :key="history.url"
+            >
+                <span class="inline-block text-truncate text-md-body-1 w-9/12">
+                    {{ history.title }}</br>
+                    <a :href="history.host + history.path">{{ history.host + history.path }}</a>
+                </span>
+                <span class="inline-block flex text-truncate text-md-body-1">
+                    <span class="w-3/4">
+                        number: {{ history.number }}<br>
+                        last visited: {{ history.lastDateText }}
+                    </span>
+                    <span>
+                        <v-btn
+                            @click="star(history.index)"
+                            outlined
+                            :ripple="false"
+                            :class="history.star ? 'bg-yellow-500' : 'bg-white'"
+                            icon
+                        >
+                            <span :class="history.star ? 'text-white' : 'text-yellow-500'">s</span>
+                        </v-btn>
+                        <v-btn
+                            @click="deleteHistory(history.index)"
+                            outlined
+                            :ripple="false"
+                            class="bg-white"
+                            icon
+                        >
+                            <span class="text-red-500">x</span>
+                        </v-btn>
+                    </span>
+                </span>
+            </v-sheet>
+      </v-main>
+    </v-app>
+  </div>
+  <script src="../cdn/vue.js"></script>
+  <script src="../cdn/vuetify.js"></script>
+  <script src="../js/func.js"></script>
+  <script src="../js/history.js"></script>
+</body>
+</html>
+
